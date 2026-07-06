@@ -8,13 +8,13 @@
 
 | 页面 | 描述 |
 |------|------|
-| — | 暂无内容，等待首次摄入 |
+| [[wiki/concepts/llm-wiki\|LLM Wiki]] | Karpathy 提出的 LLM 驱动个人知识库模式 |
 
 ### Projects（项目）
 
 | 页面 | 描述 |
 |------|------|
-| — | 暂无内容，等待首次摄入 |
+| [[wiki/projects/llm-wiki-setup/overview\|LLM Wiki 搭建]] | AIProfile wiki 从零搭建的全过程 |
 
 ### Comparisons（方案对比）
 

@@ -11,10 +11,14 @@
             "id": "a9c7162954f0411b",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "关系图谱"
+              "type": "markdown",
+              "state": {
+                "file": "wiki/syntheses/profile-summary.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "profile-summary"
             }
           }
         ]
@@ -90,6 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "wiki/syntheses/profile-summary.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -99,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "反向链接"
+              "title": "profile-summary 的反向链接列表"
             }
           },
           {
@@ -108,11 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "wiki/syntheses/profile-summary.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "出链"
+              "title": "profile-summary 的出链列表"
             }
           },
           {
@@ -150,12 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "wiki/syntheses/profile-summary.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "大纲"
+              "title": "profile-summary 的大纲"
             }
           }
         ]
@@ -178,15 +185,26 @@
   },
   "active": "a9c7162954f0411b",
   "lastOpenFiles": [
-    "mcp.md",
+    "log.md.tmp.19944.5c513add99ab",
+    "index.md.tmp.19944.3a4a868a2955",
+    "wiki/projects/llm-wiki-setup/lessons.md",
+    "wiki/projects/llm-wiki-setup/lessons.md.tmp.19944.ff224a3d4530",
+    "wiki/projects/llm-wiki-setup/overview.md",
+    "wiki/projects/llm-wiki-setup/overview.md.tmp.19944.99550d5e539d",
+    "wiki/projects/llm-wiki-setup",
+    "wiki/concepts/llm-wiki.md",
+    "wiki/concepts/llm-wiki.md.tmp.19944.355f9fcecbbb",
+    "raw/articles/2026-07-06-karpathy-llm-wiki.md",
+    "raw/articles/2026-07-06-karpathy-llm-wiki.md.tmp.19944.c9bf0cc71af3",
+    "log.md",
     "index.md",
+    "mcp.md",
     "log.md.tmp.19944.6ce3c65cebfc",
     "index.md.tmp.19944.0818efae27e8",
     "wiki/syntheses/profile-summary.md",
     "wiki/syntheses/profile-summary.md.tmp.19944.a2ec1439f861",
     "raw/notes/2026-07-06-personal-profile.md",
     "raw/notes/2026-07-06-personal-profile.md.tmp.19944.45581630cd5b",
-    "log.md",
     "CLAUDE.md"
   ]
 }
