@@ -2,6 +2,8 @@
 .DS_Store
 Thumbs.db
 
-# Obsidian
+# Obsidian workspace (session state, not config)
+.obsidian/workspace.json
 .obsidian/workspace
-.obsidian/cache
+
+# Keep Obsidian config files (core-plugins.json, app.json, etc.) as they're vault settings
