@@ -15,6 +15,7 @@
 | 页面 | 描述 |
 |------|------|
 | [[wiki/projects/llm-wiki-setup/overview\|LLM Wiki 搭建]] | AIProfile wiki 从零搭建的全过程 |
+| [[wiki/projects/pindou-content-ops/overview\|拼豆店内容运营]] | 短视频选题追踪、效果数据记录、分析优化 |
 
 ### Comparisons（方案对比）
 

@@ -1,6 +1,20 @@
 # 操作日志
 
-## 2026-07-06
+## 2026-07-07
+
+### 摄入 | Wiki 自动化缺陷分析
+
+- 对话中实测发现 CLAUDE.md 的"主动询问"约束力不足，LLM 不会自动读取 wiki
+- 保存原始分析至 raw/notes/2026-07-07-wiki-auto-access-flaw.md
+- 更新 wiki/projects/llm-wiki-setup/lessons.md — 新增 LLM-Wiki 交互缺陷章节及修复方向建议
+- 无需更新 index.md（已有指向 lessons.md 的链接）
+
+### 修复 | 全局 CLAUDE.md 强化
+
+- 针对发现的缺陷，CLAUDE.md 措辞从"建议性"改为"强制规则（前置约束）"
+- 查询前置：回答前必须先读 index.md + 相关页面
+- 摄入前置：产出有价值内容后自动判断，直接问用户
+- lessons.md 补充修复实施记录
 
 ### 初始化 | Wiki 骨架搭建
 
@@ -20,4 +34,11 @@
 - 保存 Karpathy 原文摘录至 raw/articles/2026-07-06-karpathy-llm-wiki.md
 - 创建 wiki/concepts/llm-wiki.md 概念页
 - 创建 wiki/projects/llm-wiki-setup/overview.md + lessons.md
+- 更新 index.md
+
+### 初始化 | 拼豆店内容运营追踪
+
+- 创建 wiki/projects/pindou-content-ops/overview.md
+- 创建 wiki/projects/pindou-content-ops/topic-tracker.md
+- 创建 wiki/projects/pindou-content-ops/analysis.md
 - 更新 index.md
