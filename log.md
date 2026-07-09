@@ -1,5 +1,29 @@
 # 操作日志
 
+## 2026-07-09
+
+### 摄入 | 企业微信 AI 客服搭建
+
+- 对话中完整实现了企业微信 AI 客服从零搭建：服务器选购 → 域名 SSL → 企微回调 → DeepSeek 接入 → RAG 知识库
+- 保存原始笔记至 raw/notes/2026-07-09-wechat-ai-service-setup.md
+- 创建 wiki/projects/wechat-ai-service/overview.md — 技术架构、部署要点、踩坑记录（WeChatCrypto 参数名问题）
+- 更新 index.md — 新增项目入口
+
+### 摄入 | RAG 方案对比
+
+- 对比 TF-IDF 和向量数据库在小知识库场景下的优劣
+- 保存原始笔记至 raw/notes/2026-07-09-rag-approaches-comparison.md
+- 创建 wiki/comparisons/rag-approaches.md
+- 更新 index.md — 首次填充 Comparisions 板块
+
+### 修复 | 摄入前置改为不可跳过流程步骤
+
+- 根因：LLM 在"任务模式"下不会主动跳出当前任务执行摄入检查
+- 修复：摄入前置从"自动判断"改为"每完成一个独立任务，在汇报完成前必须执行摄入检查"
+- lessons.md 补充第三次修复记录
+
+---
+
 ## 2026-07-07
 
 ### 摄入 | Wiki 自动化缺陷分析

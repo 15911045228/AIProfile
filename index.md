@@ -15,13 +15,14 @@
 | 页面 | 描述 |
 |------|------|
 | [[wiki/projects/llm-wiki-setup/overview\|LLM Wiki 搭建]] | AIProfile wiki 从零搭建的全过程 |
+| [[wiki/projects/wechat-ai-service/overview\|企业微信 AI 客服]] | 企微 + DeepSeek + RAG 搭建拼豆店 AI 客服 |
 | [[wiki/projects/pindou-content-ops/overview\|拼豆店内容运营]] | 短视频选题追踪、效果数据记录、分析优化 |
 
 ### Comparisons（方案对比）
 
 | 页面 | 描述 |
 |------|------|
-| — | 暂无内容，等待首次摄入 |
+| [[wiki/comparisons/rag-approaches\|RAG 方案对比]] | TF-IDF vs 向量数据库，小知识库场景的选型分析 |
 
 ### Syntheses（综合综述）
 
@@ -31,4 +32,4 @@
 
 ---
 
-> 最后更新：2026-07-06
+> 最后更新：2026-07-09
