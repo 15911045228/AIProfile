@@ -1,56 +1,58 @@
 ---
 tags: [comparison]
 created: 2026-07-09
-updated: 2026-07-09
+updated: 2026-07-10
 sources: [claude-code-session]
 ---
 
-# RAG 实现方案：TF-IDF vs 向量数据库
+# RAG 实现方案对比
 
 ## 概述
 
-RAG（Retrieval-Augmented Generation）是实现 AI 客服知识库的关键环节。对比两种方案在小规模知识库场景下的适用性。
+RAG（Retrieval-Augmented Generation）是实现 AI 客服知识库的关键环节。对比三种方案在实战中的表现。
 
 ## 方案对比
 
-| 维度 | TF-IDF + 余弦相似度 | 向量数据库（ChromaDB + ONNX Embedding） |
-|------|-------------------|--------------------------------------|
-| 检索原理 | 关键词匹配 + TF 加权 | 语义 Embedding + 向量距离 |
-| 额外依赖 | 无 | 需下载 ONNX 模型（~80MB） |
-| 部署速度 | 秒级 | 首次下载需数十分钟 |
-| 语义理解 | ❌ 只能匹配词汇 | ✅ 理解近义词/语义 |
-| 小知识库（<100条） | 够用 | 够用 |
-| 大知识库（>1000条） | 效果下降 | 效果好 |
-| 短查询（2-4字） | 容易无匹配 | 更好 |
+| 维度 | TF-IDF | n-gram 哈希 + FAISS | BGE Embedding + FAISS |
+|------|--------|-------------------|----------------------|
+| 检索原理 | 关键词匹配 | 字符级哈希碰撞 | 语义 Embedding |
+| 额外依赖 | 无 | numpy + faiss | sentence-transformers + 模型文件 |
+| 部署速度 | 秒级 | 秒级 | 需下载模型（~100MB，魔搭 ~10s） |
+| 语义理解 | ❌ | ❌ | ✅ |
+| 中文效果 | 差 | 差 | 好（BGE 专为中文优化） |
+| 小知识库 | 能用 | 能用 | 好 |
+| 面试价值 | 低 | 中（体现架构设计） | 高（主流方案） |
 
-## TF-IDF 的不足
+## 实战经验
 
-TF-IDF 本质是词汇重叠匹配，无法理解语义关联：
-- 用户说"钜惠" → 匹配不到"优惠"
-- 用户说"怎么玩" → 匹配不到"制作流程"
-- "几点开门" vs "营业时间" → 字面不重叠则无匹配（可在知识库中加别名缓解）
+### 不要用自制的 Embedding
 
-## 什么时候该升级
+自己写 hash embedding 看似"省了模型下载"，但面试时无法解释"为什么不用主流方案"。一步到位用 BGE 才是正确选择。
 
-- 知识库条目超过 100 条
-- 用户问法多样，频繁出现"我说了但 AI 没理解"的情况
-- 需要跨文档的语义关联检索
+### HuggingFace 被墙怎么办
 
-## 升级路径
+国内服务器无法直接访问 HuggingFace，速度 <20KB/s。解决方案：
 
-升级只需重写 `knowledge_base.py`：
+1. **ModelScope（推荐）**：阿里旗下的模型托管平台，国内下载 ~10MB/s
+2. **预下载后上传**：在本机下载好 ONNX 模型，scp 到服务器
+3. **API Embedding**：使用阿里 DashScope / SiliconFlow 等 API
 
-```python
-import chromadb
-client = chromadb.PersistentClient(path=".chroma_db")
-collection = client.get_or_create_collection("shop_knowledge")
-collection.add(documents=[...], ids=[...])
-results = collection.query(query_texts=[user_msg], n_results=3)
-```
+### 模型下载方式对比
 
-Embedding 模型可选：
-1. **本地 ONNX**（all-MiniLM-L6-v2）— 免费，首次需下载
-2. **API Embedding**（DeepSeek / OpenAI）— 按量付费，无需下载
+| 方式 | 速度 | 稳定性 | 说明 |
+|------|------|--------|------|
+| HuggingFace 直连 | <20KB/s | ❌ 被墙 | 不可用 |
+| HF-Mirror | ~20KB/s | ❌ 不稳定 | 很多时候也慢 |
+| ModelScope | ~10MB/s | ✅ 稳定 | 推荐 |
+| 本地下载 + scp | 取决于本机网络 | ✅ 最可靠 | 适合一次性部署 |
+
+### BGE 模型选型
+
+| 模型 | 维度 | 大小 | 中文效果 | 推荐场景 |
+|------|------|------|---------|---------|
+| bge-small-zh-v1.5 | 512 | ~100MB | 好 | MVP 首选 |
+| bge-base-zh-v1.5 | 768 | ~400MB | 更好 | 生产环境 |
+| bge-large-zh-v1.5 | 1024 | ~1.3GB | 最好 | 高精度场景 |
 
 ## 关联页面
 

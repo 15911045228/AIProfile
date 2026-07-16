@@ -1,5 +1,67 @@
 # 操作日志
 
+## 2026-07-16
+
+### 修复 | 新增安全规则（密钥不入库）
+
+- 发现 wiki 规则缺失安全约束，AIProfile 是 public 仓库，密钥暴露风险高
+- 全局 CLAUDE.md 新增"安全前置"：严禁存储 API Key / Token / 密码 / 私钥 / 个人隐私
+- AIProfile/CLAUDE.md 新增"安全规则（最高优先级）"章节
+- 扫描现有 wiki 内容，未发现真实密钥值
+
+## 2026-07-16
+
+### 摄入 | 微信客服本地验证阶段0 + faiss 中文路径坑
+
+- 阶段0 去风险全过：import app、mock /wxkf 端到端 4/4、BGE 下载 + FAISS 建库 42 块 + get_context 检索通
+- 踩坑：faiss C++ 层在 Windows 中文路径下读写崩溃，修复 rag/store.py（临时文件中转）
+- 保存原始笔记至 raw/notes/2026-07-16-wechat-kf-phase0-faiss.md
+- 更新 wiki/projects/wechat-ai-service/overview.md — 本地验证状态更新为阶段0完成 + 新增 faiss 本地运行坑
+- 更新 index.md（最后更新日期 2026-07-16）
+
+## 2026-07-14
+
+### 摄入 | Windows C 盘满盘清理
+
+- 实战：本机 C 盘 80G 满盘(0 可用)排查 + 安全清理，释放 ~3.8G 恢复到 3.9G 可用
+- 关键经验：Git Bash 下 `powershell -Command` 会吞掉 `$` 变量，须写 .ps1 用 `-File` 跑
+- 关键认知：C 盘大头是 AppData 数据(37G)而非程序二进制(15G)，游戏多在别的盘
+- 安全清理清单：WPS 旧安装包 / updater 残留 / NVIDIA 着色器缓存 / .gradle / npm-cache / 磁盘清理 / 关休眠
+- 迁移思路：微信文件管理改路径最安全；mklink /J 迁 AppData 大目录收益最大
+- 保存原始笔记至 raw/notes/2026-07-14-windows-c-disk-cleanup.md
+- 创建 wiki/concepts/windows-c-disk-cleanup.md
+- 更新 index.md（Concepts 新增入口）
+
+### 摄入 | 微信客服接入加密自测 + 踩坑
+
+- 本地 worktree 真实跑通微信客服加解密（verify_url + parse_event，5/5 通过）
+- 踩坑：wechatpy 加密后端(cryptography)是可选依赖；入站回调信封与回复信封对称、可用 encrypt_message 造测试信封
+- 保存原始笔记至 raw/notes/2026-07-14-wechat-kf-crypto-verify.md
+- 更新 wiki/projects/wechat-ai-service/overview.md — 新增加密后端坑、入站信封测试技巧、本地验证状态小节
+- 更新 index.md（最后更新日期 2026-07-14）
+
+## 2026-07-10
+
+### 摄入 | 拼豆店客服知识库
+
+- 对话中完整规划了 15 个文件的客服知识库结构（三层：基础信息/问答服务/运营增强）
+- 关键方法：意图库 + 案例库 + 复盘库的三层升级，价格与活动合并、历史活动沉淀
+- 保存原始笔记至 raw/notes/2026-07-10-pindou-kb-structure.md
+- 创建 wiki/projects/pindou-knowledge-base/overview.md
+- 更新 index.md
+
+### 摄入 | BGE Embedding + FAISS 向量 RAG 实战经验
+
+- RAG 演进总结：TF-IDF(V1) → n-gram 哈希(V2) → BGE(V3)，最终方案为主流向量 RAG
+- 踩坑记录：HuggingFace 被墙、HF-Mirror 不稳定、ModelScope 为最佳方案（~10MB/s）
+- WeChatCrypto 参数名坑（corp_id → corpid → app_id），decrypt_echostr 方法缺失
+- 保存原始笔记至 raw/notes/2026-07-10-bge-rag-practice.md
+- 更新 wiki/projects/wechat-ai-service/overview.md — 增加 RAG 演进三阶段、新架构、15 文件知识库
+- 更新 wiki/comparisons/rag-approaches.md — 增加 BGE 方案对比、HuggingFace 被墙解决方案、BGE 选型表
+- 更新 index.md（无需新增入口，已有页面内容更新）
+
+---
+
 ## 2026-07-09
 
 ### 摄入 | 企业微信 AI 客服搭建
