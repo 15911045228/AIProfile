@@ -1,5 +1,6 @@
 ---
-tags: [concept]
+tags: [concept, wiki, llm]
+status: active
 created: 2026-07-06
 updated: 2026-07-06
 sources:
@@ -32,8 +33,7 @@ LLM Wiki 是由 Andrej Karpathy 提出的个人知识库模式：由 LLM 持续�
 
 ## 关联页面
 
-- [[rag]]
-- [[project-lessons]]
+- [[llm-wiki-setup]]
 
 ## 外部链接
 

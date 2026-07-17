@@ -1,5 +1,20 @@
 # 操作日志
 
+## 2026-07-17
+
+### 修整 | wiki 系统化改进（过期标记 + 交叉链接 + 部署清单）
+
+- 更新 AIProfile/CLAUDE.md schema：
+  - 页面规范增加 `status` 字段（active/deprecated/superseded）
+  - 标签从单标签改为多标签
+  - 摄入流程新增：标记 superseded 旧笔记 + 添加交叉链接
+  - 增加 `wiki/checklists/` 目录
+  - Lint 增加过期/重合/清单过时检查
+- 全局 CLAUDE.md 同步更新操作指南
+- 修整 7 个现有 wiki 页面：添加 status: active + 多标签 + 修复死链
+- 创建 wiki/checklists/wechat-ai-deploy.md：企微客服完整部署清单
+- 创建 raw/archive/ 目录
+
 ## 2026-07-16
 
 ### 修复 | 新增安全规则（密钥不入库）
@@ -18,6 +33,32 @@
 - 保存原始笔记至 raw/notes/2026-07-16-wechat-kf-phase0-faiss.md
 - 更新 wiki/projects/wechat-ai-service/overview.md — 本地验证状态更新为阶段0完成 + 新增 faiss 本地运行坑
 - 更新 index.md（最后更新日期 2026-07-16）
+
+### 摄入 | 真实 WECHAT_KF_* 凭证本地预检
+- 用户提供了复用自建应用（2026-07-09 那个）的 CorpId/Secret/Token/AESKey
+- 本地预检 ALL PASS：WeChatKF 用真实值构造成功（AESKey 合法 32 字节）、verify_url + parse_event 加解密往返通过
+- 说明：仅证明凭证自洽、格式合法；live GET /wxkf 仍待云服务器 + 可信 IP + 企微后台触发
+- 凭证仅存本地 .env（已 gitignore），未入 wiki
+
+### 摄入 | 微信客服复用自建应用 + 服务器部署经验
+- 重要实践：微信客服不需要新建自建应用，可直接复用已有的，改回调为 /wxkf 即可
+- 服务器部署完成（腾讯云轻量 4C4G / Ubuntu 22.04 / IP 192.144.186.112）
+- SSH 踩坑：MaxStartups 限流需间隔 8-10 秒重连
+- Nginx 已配 /wxkf 路由、SSL 已生效（Let's Encrypt）、服务已重启、health OK
+- 保存原始笔记至 raw/notes/2026-07-16-wechat-kf-deploy.md
+- 更新 wiki/projects/wechat-ai-service/overview.md — 增加复用应用说明、更新服务器配置、更新待完成列表
+
+### 摄入 | 数据库迁移 + 知识库升级到 pgvector
+- 完成 PostgreSQL + pgvector 全栈迁移：6 张表（users、conversations、messages、kf_cursors、ai_logs、knowledge_chunks）
+- 游标从 JSON 文件迁移到 PostgreSQL，解决多 workers 竞态
+- 聊天记录自动落盘，重启不丢上下文
+- FAISS 文件 → pgvector 向量搜索（`<=>` 余弦距离，精确搜索）
+- 知识库 42 块从 `.vector_store/` 迁入 PostgreSQL
+- 新增 cross-encoder reranker（BGE-reranker-v2-m3，HF 国内被墙，fallback 正常）
+- 新增 ai_logs 表，每次 AI 调用记录耗时 + 模型 + token
+- 保存原始笔记至 raw/notes/2026-07-17-pgvector-migration.md
+- 更新 wiki/projects/wechat-ai-service/overview.md — 验证状态更新为 PG 迁移完成
+- 更新 index.md 日期
 
 ## 2026-07-14
 

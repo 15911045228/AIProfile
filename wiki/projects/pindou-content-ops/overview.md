@@ -1,5 +1,6 @@
 ---
-tags: [project]
+tags: [project, pindou, content]
+status: active
 created: 2026-07-06
 updated: 2026-07-06
 sources: []

@@ -1,5 +1,6 @@
 ---
-tags: [concept]
+tags: [concept, windows]
+status: active
 created: 2026-07-14
 updated: 2026-07-14
 sources:

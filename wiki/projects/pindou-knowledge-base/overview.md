@@ -1,5 +1,6 @@
 ---
-tags: [project]
+tags: [project, pindou, rag]
+status: active
 created: 2026-07-10
 updated: 2026-07-10
 sources: [claude-code-session]
